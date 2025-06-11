@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restive Online Store - Cart</title>
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <div class="cart-container">
+        <h1>Cart</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody id="cart-body">
+                <!-- Cart items will be displayed here -->
+            </tbody>
+        </table>
+        <p id="cart-total"></p>
+        <button id="checkout">Checkout</button>
+        <button id="continue-shopping">Continue Shopping</button>
+    </div>
+
+    <script>
+        // Get cart items from local storage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Display cart items
+        const cartBody = document.getElementById('cart-body');
+        cart.forEach((item, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td><input type="number" value="${item.quantity}" data-index="${index}"></td>
+                <td>$${item.price}</td>
+                <td id="total-${index}">$${item.price * item.quantity}</td>
+                <td><button class="remove-item" data-index="${index}">Remove</button></td>
+            `;
+            cartBody.appendChild(row);
+        });
+
+        // Display cart total
+        const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+        document.getElementById('cart-total').innerHTML = `Total: $${cartTotal.toFixed(2)}`;
+
+        // Add event listener to quantity inputs
+        const quantityInputs = document.querySelectorAll('input[type="number"]');
+        quantityInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                const index = parseInt(input.getAttribute('data-index'));
+                cart[index].quantity = parseInt(input.value);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCart(index);
+            });
+        });
+
+        // Add event listener to remove item buttons
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-item')) {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCart();
+            }
+        });
+
+        // Add event listener to checkout button
+        document.getElementById('checkout').addEventListener('click', () => {
+            // Clear cart data
+            localStorage.removeItem('cart');
+
+            // Send email to ninjaprojects3x@gmail.com
+            const emailBody = cart.map(item => `${item.name} x ${item.quantity} = $${item.price * item.quantity}`).join('\n');
+            const emailSubject = 'Order from Restive Online Store';
+            const email = `mailto:ninjaprojects3x@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+
+            // Redirect to PayPal
+            const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=your_email@example.com&amount=${cartTotal}&item_name=Order+from+Restive+Online+Store&return=http://localhost:8080&cancel_return=http://localhost:8080`;
+            window.open(email, '_blank');
+            window.location.href = paypalUrl;
+        });
+
+        // Add event listener to continue shopping button
+        document.getElementById('continue-shopping').addEventListener('click', () => {
+            // Redirect to home page
+            window.location.href = 'home.html';
+        });
+
+        // Update cart function
+        function updateCart(index = null) {
+            if (index!== null) {
+                const total = cart[index].price * cart[index].quantity;
+                document.getElementById(`total-${index}`).innerHTML = `$${total.toFixed(2)}`;
+            } else {
+                cartBody.innerHTML = '';
+                cart.forEach((item, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.name}</td>
+                        <td><input type="number" value="${item.quantity}" data-index="${index}"></td>
+                        <td>$${item.price}</td>
+                        <td id="total-${index}">$${item.price * item.quantity}</td>
+                        <td><button class="remove-item" data-index="${index}">Remove</button></td>
+                    `;
+                    cartBody.appendChild(row);
+                });
+            }
+            const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+            document.getElementById('cart-total').innerHTML = `Total: $${cartTotal.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

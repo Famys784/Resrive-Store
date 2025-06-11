@@ -1,0 +1,174 @@
+/* home.css */
+
+/* Reset default margin and padding */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the navbar */
+.navbar {
+    background-color: #1e1e2f; /* Dark navy background */
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style the logo */
+.logo {
+    width: 90px;
+    height: auto;
+}
+
+/* Style the navigation links */
+.nav-links {
+    list-style: none;
+    display: flex; /* This makes the links horizontal */
+    gap: 20px; /* Adds space between links */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #00bfff; /* Light blue hover effect */
+}
+.header{
+    background-color: #3232a3; /* Dark navy background */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.button-list {
+    display: flex; /* Enable flexbox for the list */
+    justify-content: center; /* Center the items horizontally */
+    list-style-type: none; /* Remove bullet points from the list */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+  }
+  
+  .button-list li {
+    margin: 0 10px; /* Add some horizontal spacing between the buttons */
+  }
+  
+  .button {
+    /* Add any other button styling you have or want here */
+    display: inline-block; /* Allows setting width and height if needed */
+    padding: 10px 20px;
+    text-decoration: none; /* Remove underlines from links */
+    color: white; /* Example text color */
+    background-color: rgb(236, 36, 36); /* Example background color */
+    border: 5px solid black; /* Example border */
+    border-radius: 5px; /* Example rounded corners */
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Reduced min-width */
+    gap: 10px; /* Slightly reduced gap */
+    margin-top: 20px;
+  }
+  
+  .product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px; /* Slightly reduced padding */
+    text-align: center;
+  }
+  
+  .product-card img {
+    max-width: 50%; /* Slightly reduced max-width of the image */
+    height: auto;
+    margin-bottom: 5px; /* Slightly reduced margin-bottom */
+  }
+  
+  .product-card h3 {
+    margin-top: 0;
+    margin-bottom: 3px; /* Slightly reduced margin-bottom */
+    font-size: 1em; /* Slightly smaller font size for the heading */
+  }
+  
+  .product-card p {
+    font-size: 0.8em; /* Slightly smaller font size for the description */
+    color: #555;
+  }
+
+  .product-card button{
+    background-color: #4CAF50; /* Green background for the button */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 10px 15px; /* Padding for the button */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 0.9em; /* Slightly smaller font size for the button text */
+  }
+
+  .product-card button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+
+.cart{
+  height: auto;
+  width: 40%;
+  padding: none;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+.product-card button a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.product-card button a:hover {
+  color: #00bfff; /* Light blue hover effect */
+}
+.section{
+  padding: 20px;
+  background-color: #0ce442; /* Light gray background for sections */
+  margin: 20px 0; /* Margin between sections */
+  border-radius: 8px; /* Rounded corners for sections */
+}
+
+.section1{
+  padding: 20px;
+  background-color: #eb509d; /* Light gray background for sections */
+  margin: 20px 0; /* Margin between sections */
+  border-radius: 8px; /* Rounded corners for sections */
+}
+.section2{
+  padding: 20px;
+  background-color: #b19af1; /* Light gray background for sections */
+  margin: 20px 0; /* Margin between sections */
+  border-radius: 8px; /* Rounded corners for sections */
+}
+footer {
+    background-color: #1e1e2f; /* Dark navy background */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+.contact-form{
+    max-width: 600px;
+    margin: 1px auto;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
