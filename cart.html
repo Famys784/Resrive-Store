@@ -50,6 +50,9 @@
         const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
         document.getElementById('cart-total').innerHTML = `Total: $${cartTotal.toFixed(2)}`;
 
+        // Store total price in local storage
+        localStorage.setItem('totalPrice', cartTotal);
+
         // Add event listener to quantity inputs
         const quantityInputs = document.querySelectorAll('input[type="number"]');
         quantityInputs.forEach(input => {
@@ -73,24 +76,14 @@
 
         // Add event listener to checkout button
         document.getElementById('checkout').addEventListener('click', () => {
-            // Clear cart data
-            localStorage.removeItem('cart');
-
-            // Send email to ninjaprojects3x@gmail.com
-            const emailBody = cart.map(item => `${item.name} x ${item.quantity} = $${item.price * item.quantity}`).join('\n');
-            const emailSubject = 'Order from Restive Online Store';
-            const email = `mailto:ninjaprojects3x@gmail.com?subject=${emailSubject}&body=${emailBody}`;
-
-            // Redirect to PayPal
-            const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=your_email@example.com&amount=${cartTotal}&item_name=Order+from+Restive+Online+Store&return=http://localhost:8080&cancel_return=http://localhost:8080`;
-            window.open(email, '_blank');
-            window.location.href = paypalUrl;
+            // Redirect to payment.html
+            window.location.href = 'payment.html';
         });
 
         // Add event listener to continue shopping button
         document.getElementById('continue-shopping').addEventListener('click', () => {
             // Redirect to home page
-            window.location.href = 'home.html';
+            window.location.href = 'http://localhost:8080';
         });
 
         // Update cart function
@@ -114,6 +107,7 @@
             }
             const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
             document.getElementById('cart-total').innerHTML = `Total: $${cartTotal.toFixed(2)}`;
+            localStorage.setItem('totalPrice', cartTotal);
         }
     </script>
 </body>
