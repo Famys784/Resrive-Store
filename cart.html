@@ -50,9 +50,6 @@
         const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
         document.getElementById('cart-total').innerHTML = `Total: $${cartTotal.toFixed(2)}`;
 
-        // Store total price in local storage
-        localStorage.setItem('totalPrice', cartTotal);
-
         // Add event listener to quantity inputs
         const quantityInputs = document.querySelectorAll('input[type="number"]');
         quantityInputs.forEach(input => {
@@ -82,8 +79,8 @@
 
         // Add event listener to continue shopping button
         document.getElementById('continue-shopping').addEventListener('click', () => {
-            // Redirect to home page
-            window.location.href = 'http://localhost:8080';
+            // Redirect to index.html
+            window.location.href = 'index.html';
         });
 
         // Update cart function
@@ -107,7 +104,6 @@
             }
             const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
             document.getElementById('cart-total').innerHTML = `Total: $${cartTotal.toFixed(2)}`;
-            localStorage.setItem('totalPrice', cartTotal);
         }
     </script>
 </body>
